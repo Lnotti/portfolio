@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luca — Engineering Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F6F4F0;
+  --surface: #FFFFFF;
+  --surface2: #EDEAE3;
+  --border: #DDD9D0;
+  --border-soft: #E8E4DC;
+  --text: #1A1916;
+  --text-muted: #6B6860;
+  --text-subtle: #ABA89F;
+  --accent: #1A3A8F;
+  --radius: 12px;
+  --radius-sm: 7px;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #131210;
+    --surface: #1C1B18;
+    --surface2: #252320;
+    --border: #363430;
+    --border-soft: #2C2A26;
+    --text: #EDE9E2;
+    --text-muted: #8A877E;
+    --text-subtle: #504E49;
+    --accent: #5B83E8;
+  }
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.page { max-width: 1160px; margin: 0 auto; padding: 0 2rem 6rem; }
+
+/* HEADER */
+header {
+  padding: 4rem 0 3rem;
+  border-bottom: 1px solid var(--border-soft);
+  margin-bottom: 2.5rem;
+}
+.h-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(36px, 5vw, 54px);
+  line-height: 1;
+  letter-spacing: -1.5px;
+}
+.h-title em { font-style: italic; color: var(--text-muted); }
+.h-sub {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  color: var(--text-subtle);
+  margin-top: 12px;
+  letter-spacing: 0.04em;
+}
+
+/* FILTERS */
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+.filters { display: flex; gap: 6px; flex-wrap: wrap; }
+.tag-btn {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  padding: 5px 15px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.tag-btn:hover { border-color: var(--text-muted); color: var(--text); }
+.tag-btn.active { background: var(--text); color: var(--bg); border-color: var(--text); }
+.count { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text-subtle); }
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 14px;
+}
+
+/* CARD */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.18s, transform 0.18s, box-shadow 0.18s;
+  display: flex;
+  flex-direction: column;
+  animation: fadeUp 0.4s ease both;
+}
+.card:hover {
+  border-color: var(--border);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04);
+}
+.card.hidden { display: none; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.card:nth-child(1)  { animation-delay: .04s }
+.card:nth-child(2)  { animation-delay: .08s }
+.card:nth-child(3)  { animation-delay: .12s }
+.card:nth-child(4)  { animation-delay: .16s }
+.card:nth-child(5)  { animation-delay: .20s }
+.card:nth-child(6)  { animation-delay: .24s }
+.card:nth-child(7)  { animation-delay: .28s }
+.card:nth-child(8)  { animation-delay: .32s }
+.card:nth-child(9)  { animation-delay: .36s }
+.card:nth-child(10) { animation-delay: .40s }
+.card:nth-child(11) { animation-delay: .44s }
+
+.card-thumb {
+  width: 100%; height: 160px;
+  background: var(--surface2);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; position: relative; flex-shrink: 0;
+}
+.card-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.card-thumb-placeholder {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; color: var(--text-subtle); letter-spacing: .05em;
+}
+.card-photo-count {
+  position: absolute; bottom: 8px; right: 8px;
+  background: rgba(0,0,0,.55); color: #fff;
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  padding: 3px 8px; border-radius: 20px; backdrop-filter: blur(4px);
+}
+
+.card-body { padding: 1.1rem; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.card-tags { display: flex; gap: 5px; flex-wrap: wrap; }
+.badge {
+  font-size: 10px; padding: 2px 8px; border-radius: 20px;
+  font-family: 'DM Mono', monospace; font-weight: 500;
+}
+.badge-fpv      { background: #E3EEF9; color: #0B3D72; }
+.badge-robotics { background: #DDF4EC; color: #074D3E; }
+.badge-school   { background: #FBF0E0; color: #5C3405; }
+.badge-3d       { background: #EDECFE; color: #362E8A; }
+.badge-elec     { background: #FBEBE7; color: #6B2310; }
+.badge-software { background: #E8F4DC; color: #244A08; }
+@media (prefers-color-scheme: dark) {
+  .badge-fpv      { background: #0B2040; color: #6AAEE8; }
+  .badge-robotics { background: #052E22; color: #4ECBA0; }
+  .badge-school   { background: #2C1800; color: #E0A040; }
+  .badge-3d       { background: #18163C; color: #9090EE; }
+  .badge-elec     { background: #2C0E06; color: #EE8060; }
+  .badge-software { background: #0E2204; color: #88CC44; }
+}
+
+.card-title { font-family: 'Instrument Serif', serif; font-size: 17px; line-height: 1.3; letter-spacing: -.2px; }
+.card-desc {
+  font-size: 13px; color: var(--text-muted); line-height: 1.65;
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+}
+.card-meta {
+  margin-top: auto; padding-top: 10px;
+  border-top: 1px solid var(--border-soft);
+  font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-subtle);
+}
+.card-cta { font-size: 12px; color: var(--accent); font-family: 'DM Mono', monospace; margin-top: 2px; }
+
+/* OVERLAY + PANEL */
+.overlay {
+  position: fixed; inset: 0;
+  background: rgba(10,10,8,.6);
+  z-index: 100; opacity: 0; pointer-events: none;
+  transition: opacity .25s; backdrop-filter: blur(3px);
+}
+.overlay.open { opacity: 1; pointer-events: all; }
+
+.panel {
+  position: fixed; top: 0; right: 0; bottom: 0;
+  width: min(700px, 100vw);
+  background: var(--surface);
+  border-left: 1px solid var(--border);
+  z-index: 101; overflow-y: auto;
+  transform: translateX(100%);
+  transition: transform .32s cubic-bezier(.32,.72,0,1);
+}
+.panel.open { transform: translateX(0); }
+.panel-inner { padding: 1.5rem 2rem 5rem; }
+
+.panel-topbar {
+  display: flex; justify-content: flex-end;
+  position: sticky; top: 0; background: var(--surface);
+  padding: .75rem 0; margin-bottom: 1rem; z-index: 2;
+  border-bottom: 1px solid var(--border-soft);
+}
+.close-btn {
+  font-family: 'DM Mono', monospace; font-size: 11px;
+  padding: 6px 14px; border-radius: 20px;
+  border: 1px solid var(--border); background: var(--surface2);
+  color: var(--text-muted); cursor: pointer; transition: all .15s;
+}
+.close-btn:hover { color: var(--text); border-color: var(--text); }
+
+.panel-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: .9rem; }
+.panel-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(26px, 4vw, 36px);
+  line-height: 1.15; letter-spacing: -.5px; margin-bottom: .5rem;
+}
+.panel-meta {
+  font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text-subtle);
+  padding-bottom: 1.5rem; border-bottom: 1px solid var(--border-soft); margin-bottom: 1.75rem;
+}
+
+/* GALLERY */
+.gallery { margin-bottom: 2rem; }
+.gallery-main {
+  width: 100%; aspect-ratio: 16/9;
+  background: var(--surface2); border-radius: var(--radius);
+  overflow: hidden; display: flex; align-items: center; justify-content: center;
+  margin-bottom: 8px; border: 1px solid var(--border-soft);
+}
+.gallery-main img { width: 100%; height: 100%; object-fit: cover; cursor: zoom-in; }
+.gallery-placeholder {
+  font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text-subtle);
+  text-align: center; padding: 2rem; line-height: 1.8;
+}
+.gallery-strip {
+  display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px;
+  scrollbar-width: none;
+}
+.gallery-strip::-webkit-scrollbar { display: none; }
+.gallery-thumb {
+  flex-shrink: 0; width: 72px; height: 52px;
+  border-radius: 5px; overflow: hidden; cursor: pointer;
+  border: 2px solid transparent; transition: all .15s; opacity: .6;
+  background: var(--surface2);
+}
+.gallery-thumb.active { border-color: var(--accent); opacity: 1; }
+.gallery-thumb:hover { opacity: 1; }
+.gallery-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+/* PANEL TEXT */
+.section-label {
+  font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--text-subtle); margin-bottom: .6rem;
+}
+.panel-desc { font-size: 14.5px; color: var(--text-muted); line-height: 1.82; white-space: pre-line; margin-bottom: 2rem; }
+.highlights { display: flex; flex-direction: column; gap: 6px; margin-bottom: 2rem; }
+.hl-item {
+  display: flex; gap: 10px; align-items: baseline;
+  font-size: 13.5px; line-height: 1.6; color: var(--text-muted);
+}
+.hl-item::before { content: '—'; font-family: 'DM Mono', monospace; color: var(--text-subtle); flex-shrink: 0; }
+
+/* LIGHTBOX */
+.lightbox {
+  position: fixed; inset: 0; z-index: 300;
+  background: rgba(0,0,0,.92);
+  display: none; align-items: center; justify-content: center; cursor: zoom-out;
+}
+.lightbox.open { display: flex; }
+.lightbox img { max-width: 92vw; max-height: 88vh; object-fit: contain; border-radius: 4px; }
+.lb-close {
+  position: absolute; top: 1.5rem; right: 1.5rem;
+  color: rgba(255,255,255,.7); font-family: 'DM Mono', monospace; font-size: 12px;
+  cursor: pointer; background: rgba(255,255,255,.12); border: none;
+  padding: 6px 14px; border-radius: 20px; transition: background .15s;
+}
+.lb-close:hover { background: rgba(255,255,255,.22); }
+.lb-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: rgba(255,255,255,.12); border: none; color: #fff;
+  font-size: 20px; width: 44px; height: 44px; border-radius: 50%;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: background .15s;
+}
+.lb-nav:hover { background: rgba(255,255,255,.25); }
+#lbPrev { left: 1.5rem; }
+#lbNext { right: 1.5rem; }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <header>
+    <div class="h-title">Luca<em>'s</em><br>Engineering Portfolio</div>
+    <div class="h-sub">FPV · Robotics · Electronics · Software · Fabrication</div>
+  </header>
+
+  <div class="toolbar">
+    <div class="filters" id="filters">
+      <button class="tag-btn active" data-filter="all">All</button>
+      <button class="tag-btn" data-filter="fpv">FPV Drones</button>
+      <button class="tag-btn" data-filter="robotics">Robotics</button>
+      <button class="tag-btn" data-filter="school">School</button>
+      <button class="tag-btn" data-filter="3d">3D Printing</button>
+      <button class="tag-btn" data-filter="software">Software</button>
+      <button class="tag-btn" data-filter="elec">Electronics</button>
+    </div>
+    <span class="count" id="count"></span>
+  </div>
+
+  <div class="grid" id="grid"></div>
+</div>
+
+<!-- SIDE PANEL -->
+<div class="overlay" id="overlay" onclick="closePanel()"></div>
+<div class="panel" id="panel">
+  <div class="panel-inner">
+    <div class="panel-topbar">
+      <button class="close-btn" onclick="closePanel()">✕ Close</button>
+    </div>
+    <div class="panel-tags" id="panelTags"></div>
+    <div class="panel-title" id="panelTitle"></div>
+    <div class="panel-meta" id="panelMeta"></div>
+    <div class="gallery" id="panelGallery"></div>
+    <div class="section-label">Overview</div>
+    <div class="panel-desc" id="panelDesc"></div>
+    <div id="hlWrap" style="display:none">
+      <div class="section-label">Key Points</div>
+      <div class="highlights" id="panelHL"></div>
+    </div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="handleLbClick(event)">
+  <button class="lb-close" onclick="closeLB()">✕ Close</button>
+  <button class="lb-nav" id="lbPrev" onclick="lbStep(-1,event)">&#8592;</button>
+  <img id="lbImg" src="" alt="">
+  <button class="lb-nav" id="lbNext" onclick="lbStep(1,event)">&#8594;</button>
+</div>
+
+<script>
+// ─── PROJECT DATA ─────────────────────────────────────────────────────────────
+// Add image URLs to the `images` array for each project.
+// First image = card thumbnail. All images appear in the gallery.
+// To add local images when hosting on GitHub Pages, put them in an /images/ folder
+// and reference them like: images: ['images/ftc-robot.jpg', 'images/ftc-field.jpg']
+
+const PROJECTS = [
+  {
+    id: 'ftc',
+    title: 'FTC Competition Robot',
+    tags: ['robotics', 'elec'],
+    meta: 'FTC · Mechanical & electrical design · Programming · Java',
+    desc: `Designed and built a competitive robot for FIRST Tech Challenge (FTC). Involved mechanical design, electronics integration, and programming to meet the season's game objectives.
+
+[Add your season, team number, what game it was, what mechanisms you built — intake, arm, drivetrain, autonomous, etc.]`,
+    highlights: [
+      'FIRST Tech Challenge — Season [add season name]',
+      'Team [add number] · [add your role on the team]',
+      '[Add: drivetrain type and key mechanisms]',
+      '[Add: autonomous capabilities]',
+      '[Add: competition results and any awards]',
+    ],
+    images: [],
+  },
+  {
+    id: 'darkstar',
+    title: 'Dark Star 22 FPV Quad',
+    tags: ['fpv', 'elec', '3d'],
+    meta: 'GEPRC TAKER F405 · GEP-M80 GPS/mag · Betaflight · ELRS · DJI O4 Pro',
+    desc: `Built and debugged a long-range FPV quad on the GEPRC TAKER F405 AIO. Designed and 3D printed a custom GPS mount, then soldered the GPS and magnetometer directly onto the stack.
+
+Worked through Betaflight configuration including a custom firmware cloud build with magnetometer support enabled, and deep I2C bus debugging to get the GEP-M80 communicating reliably on the STM32F405.`,
+    highlights: [
+      'GEPRC TAKER F405 AIO · ICM42688P gyro · DPS310 baro',
+      'DJI O4 Pro video with ELRS long-range control link',
+      'Custom Betaflight cloud firmware build with USE_MAG enabled',
+      '3D printed PETG GPS mast with foam vibration isolation',
+      'Hand-soldered GPS and magnetometer directly onto the FC stack',
+      'I2C bus debugging — mag_i2c_device config and clock speed tuning',
+    ],
+    images: [],
+  },
+  {
+    id: 'borz',
+    title: 'iFlight Borz 7 Mini — Assembly & Waterproofing',
+    tags: ['fpv', 'elec'],
+    meta: 'Full assembly · Conformal coating · Smoke stopper · FC diagnostics',
+    desc: `Assembled the iFlight Borz 7 Mini from components and then took on a full waterproofing modification using silicone conformal coating applied to all electronics.
+
+Performed staged submersion testing using a smoke stopper for safety, and diagnosed the USB-C port as the primary water ingress point. The project ultimately ended with a SOT-23 component on the FC smoking during testing — a hard lesson in the limits of consumer electronics waterproofing.`,
+    highlights: [
+      'Full assembly of iFlight Borz 7 Mini from component level',
+      'Silicone conformal coating applied across all electronics',
+      'Smoke stopper used throughout staged submersion testing',
+      'Diagnosed USB-C port as the primary water ingress point',
+      'SOT-23 component failure — learned FC-level failure analysis',
+    ],
+    images: [],
+  },
+  {
+    id: 'shelf',
+    title: '3D Printed Wall Mount Shelf System',
+    tags: ['3d'],
+    meta: 'FDM · Tolerance engineering · Fusion 360 · Iterative prototyping',
+    desc: `Designed and printed a modular wall-mounted shelf system entirely from scratch. What started as a practical problem turned into the most formative 3D printing project so far.
+
+Repeated tolerance failures and design shortcomings forced a real understanding of FDM printing's constraints — how walls warp, why snap-fits need clearance, how layer orientation changes part strength, and when 3D printing is the wrong tool entirely. This was the project that made 3D printing click.`,
+    highlights: [
+      'Learned FDM tolerance requirements through real print failures',
+      'Iterated on snap-fit and wall-mount geometry across multiple revisions',
+      'Understood layer anisotropy and its effect on part strength',
+      'Designed around printer limitations rather than ideal geometry',
+      'First project that produced a real, functional, installed object',
+    ],
+    images: [],
+  },
+  {
+    id: 'battery',
+    title: 'Custom Battery Pack Builds',
+    tags: ['elec'],
+    meta: 'Spot welding · BMS integration · Cell matching · 18650 / 21700',
+    desc: `Built custom lithium-ion battery packs from individual cells — covering the full process from cell selection and capacity matching to spot welding, BMS wiring, and finished pack assembly.
+
+[Add more detail — what were the packs for? What cell chemistry, voltage, and capacity? Any balance leads, XT60 connectors, custom enclosures?]`,
+    highlights: [
+      'Cell selection and capacity matching for pack consistency',
+      'Spot welding nickel strips for inter-cell connections',
+      'BMS integration for overcharge and over-discharge protection',
+      '[Add: pack specs — voltage, capacity, cell type]',
+      '[Add: what the packs were built for]',
+    ],
+    images: [],
+  },
+  {
+    id: 'skittle',
+    title: 'Skittle Color Sorter',
+    tags: ['elec', 'software'],
+    meta: 'Color sensing · Servo control · Embedded systems · [add MCU]',
+    desc: `Built an automated machine that sorts Skittles by color. Combined a mechanical dispensing mechanism, a color sensor, and embedded firmware to detect each candy and route it to the correct output bin.
+
+[Add: what microcontroller, sensor type, how the mechanical sorting works, accuracy, speed, what you learned from it.]`,
+    highlights: [
+      '[Add: microcontroller — Arduino, ESP32, etc.]',
+      '[Add: color sensor type and detection method]',
+      '[Add: mechanical sorting mechanism]',
+      '[Add: accuracy, throughput, and key challenges]',
+    ],
+    images: [],
+  },
+  {
+    id: 'studyapp',
+    title: 'Offline AI Study App — Hackathon',
+    tags: ['software'],
+    meta: 'Python · Ollama · Local LLM · Vibe coded · Honorable Mention',
+    desc: `Built an AI-powered study application during a hackathon themed "AI for Good." The core idea: lower-income students often lack internet access at home, but they do have access at school. By running a local LLM through Ollama entirely on-device, a student could download the app at school and use a fully functional AI study assistant at home — no internet, no subscription, no cost.
+
+The hackathon encouraged using AI to write the code, so the entire app was vibe-coded over roughly 8 hours while a partner handled the presentation. The app itself turned out far better than the slide deck — which earned an honorable mention from the judges.
+
+The project had a real mission behind it: making AI tutoring accessible to kids who are usually left out of the tools that could help them most.`,
+    highlights: [
+      'Hackathon theme: "AI for Good"',
+      'Designed for students without home internet — fully offline after download',
+      'Powered by Ollama running a local LLM — no API calls, no cloud dependency',
+      'Entire app vibe-coded solo in ~8 hours during the hackathon',
+      'Partner handled the presentation side',
+      'Awarded Honorable Mention',
+    ],
+    images: [],
+  },
+  {
+    id: 'doodlejump',
+    title: 'Doodle Jump Recreation — Python',
+    tags: ['software', 'school'],
+    meta: 'Python · Pygame · Game physics · CS final project',
+    desc: `Recreated the classic mobile game Doodle Jump in Python as a CS final project. Built the full game from scratch — game loop, physics, procedural platform generation, collision detection, and player controls.
+
+Demonstrated that you can build something genuinely fun from first principles, applying core CS concepts in a practical context under a real deadline.`,
+    highlights: [
+      'Full game loop built from scratch using Pygame',
+      'Physics system for jump arc and gravity',
+      'Procedural platform generation for infinite vertical scrolling',
+      'Collision detection for platforms, enemies, and power-ups',
+    ],
+    images: [],
+  },
+  {
+    id: 'rocket',
+    title: 'Model Rocket',
+    tags: ['school'],
+    meta: 'Aerodynamics · Propulsion · Structural design · Engineering class',
+    desc: `Designed and built a model rocket for a school engineering project, applying aerodynamic principles, structural design, and safe launch procedures.
+
+[Add: engine type, altitude or apogee reached, materials used, onboard electronics like an altimeter or camera, any notable results or failures.]`,
+    highlights: [
+      '[Add: engine class and thrust rating]',
+      '[Add: altitude reached or estimated]',
+      '[Add: materials and construction method]',
+      '[Add: any onboard instrumentation]',
+    ],
+    images: [],
+  },
+  {
+    id: 'lamp',
+    title: 'Edge-Lit Acrylic Lamp',
+    tags: ['school', 'elec'],
+    meta: 'LED electronics · Acrylic fabrication · Circuit design · Engineering class',
+    desc: `Designed and built an edge-lit acrylic lamp. LEDs placed along the edge of an acrylic panel create total internal reflection, illuminating any engraved or etched design on the surface from within.
+
+[Add: how the acrylic was cut or engraved, what the design was, circuit details — power supply, resistors, LED type, any dimming or color control.]`,
+    highlights: [
+      'Uses total internal reflection to light surface engravings',
+      '[Add: engraving method — laser, hand-etched, CNC]',
+      '[Add: circuit design — LED type, resistors, power supply]',
+      '[Add: any controls — dimming, color, PWM]',
+    ],
+    images: [],
+  },
+  {
+    id: 'bridge',
+    title: 'Structural Bridge',
+    tags: ['school'],
+    meta: 'Structural engineering · Load testing · Truss design · Engineering class',
+    desc: `Engineered and built a structural bridge optimized for maximum load-bearing capacity relative to its own weight, applying truss geometry and structural principles to maximize efficiency.
+
+[Add: material — balsa, popsicle sticks, pasta? Load achieved. Design decisions made. Anything that failed and what you took from it.]`,
+    highlights: [
+      '[Add: material and construction method]',
+      '[Add: truss type — Pratt, Howe, Warren, etc.]',
+      '[Add: max load achieved in testing]',
+      '[Add: efficiency ratio — load / bridge weight]',
+    ],
+    images: [],
+  },
+];
+
+// ─── TAG CONFIG ───────────────────────────────────────────────────────────────
+const TAG_META = {
+  fpv:      { label: 'FPV Drones',  cls: 'badge-fpv'      },
+  robotics: { label: 'Robotics',    cls: 'badge-robotics'  },
+  school:   { label: 'School',      cls: 'badge-school'    },
+  '3d':     { label: '3D Printing', cls: 'badge-3d'        },
+  elec:     { label: 'Electronics', cls: 'badge-elec'      },
+  software: { label: 'Software',    cls: 'badge-software'  },
+};
+function badge(id) {
+  const t = TAG_META[id]; return t ? `<span class="badge ${t.cls}">${t.label}</span>` : '';
+}
+
+// ─── RENDER GRID ──────────────────────────────────────────────────────────────
+function renderGrid() {
+  const grid = document.getElementById('grid');
+  grid.innerHTML = PROJECTS.map(p => {
+    const hasImg = p.images && p.images.length > 0;
+    const thumb  = hasImg
+      ? `<img src="${p.images[0]}" alt="${p.title}" loading="lazy">`
+      : `<span class="card-thumb-placeholder">[ no image yet ]</span>`;
+    const photoCount = hasImg && p.images.length > 1
+      ? `<span class="card-photo-count">+${p.images.length - 1} photos</span>` : '';
+    return `<div class="card" data-id="${p.id}" data-tags="${(p.tags||[]).join(',')}" onclick="openPanel('${p.id}')">
+      <div class="card-thumb">${thumb}${photoCount}</div>
+      <div class="card-body">
+        <div class="card-tags">${(p.tags||[]).map(badge).join('')}</div>
+        <div class="card-title">${p.title}</div>
+        <div class="card-desc">${p.desc.split('\n')[0]}</div>
+        <div class="card-meta">${p.meta}</div>
+        <div class="card-cta">View project →</div>
+      </div>
+    </div>`;
+  }).join('');
+  updateCount();
+}
+
+// ─── FILTER ───────────────────────────────────────────────────────────────────
+document.querySelectorAll('.tag-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    document.querySelectorAll('.card').forEach(card => {
+      const cats = (card.dataset.tags || '').split(',');
+      card.classList.toggle('hidden', f !== 'all' && !cats.includes(f));
+    });
+    updateCount();
+  });
+});
+function updateCount() {
+  const n = document.querySelectorAll('.card:not(.hidden)').length;
+  document.getElementById('count').textContent = `${n} project${n !== 1 ? 's' : ''}`;
+}
+
+// ─── PANEL ────────────────────────────────────────────────────────────────────
+let gImgs = [], gIdx = 0;
+
+function openPanel(id) {
+  const p = PROJECTS.find(x => x.id === id);
+  if (!p) return;
+  document.getElementById('panelTags').innerHTML = (p.tags||[]).map(badge).join('');
+  document.getElementById('panelTitle').textContent = p.title;
+  document.getElementById('panelMeta').textContent = p.meta;
+  document.getElementById('panelDesc').textContent = p.desc;
+
+  gImgs = p.images || []; gIdx = 0;
+  renderGallery();
+
+  const hlWrap = document.getElementById('hlWrap');
+  const hlEl   = document.getElementById('panelHL');
+  if (p.highlights && p.highlights.length) {
+    hlEl.innerHTML = p.highlights.map(h => `<div class="hl-item">${h}</div>`).join('');
+    hlWrap.style.display = '';
+  } else { hlWrap.style.display = 'none'; }
+
+  document.getElementById('panel').scrollTop = 0;
+  document.getElementById('overlay').classList.add('open');
+  document.getElementById('panel').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePanel() {
+  document.getElementById('overlay').classList.remove('open');
+  document.getElementById('panel').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ─── GALLERY ─────────────────────────────────────────────────────────────────
+function renderGallery() {
+  const el = document.getElementById('panelGallery');
+  if (!gImgs.length) {
+    el.innerHTML = `<div class="gallery-main"><div class="gallery-placeholder">No images added yet.<br><span style="font-size:10px;opacity:.6;">Add image URLs to this project's <code>images</code> array in the HTML file.</span></div></div>`;
+    return;
+  }
+  const strip = gImgs.length > 1
+    ? `<div class="gallery-strip">${gImgs.map((s,i) =>
+        `<div class="gallery-thumb ${i===0?'active':''}" onclick="setGallery(${i})"><img src="${s}" loading="lazy"></div>`
+      ).join('')}</div>` : '';
+  el.innerHTML = `<div class="gallery-main"><img id="gMain" src="${gImgs[0]}" onclick="openLB(${0})"></div>${strip}`;
+}
+
+function setGallery(idx) {
+  gIdx = idx;
+  const img = document.getElementById('gMain');
+  if (img) { img.src = gImgs[idx]; img.onclick = () => openLB(idx); }
+  document.querySelectorAll('.gallery-thumb').forEach((t,i) => t.classList.toggle('active', i===idx));
+}
+
+// ─── LIGHTBOX ────────────────────────────────────────────────────────────────
+function openLB(idx) {
+  gIdx = idx;
+  document.getElementById('lbImg').src = gImgs[idx];
+  document.getElementById('lbPrev').style.display = gImgs.length > 1 ? '' : 'none';
+  document.getElementById('lbNext').style.display = gImgs.length > 1 ? '' : 'none';
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLB() { document.getElementById('lightbox').classList.remove('open'); }
+function handleLbClick(e) { if (e.target === e.currentTarget) closeLB(); }
+function lbStep(dir, e) {
+  e.stopPropagation();
+  gIdx = (gIdx + dir + gImgs.length) % gImgs.length;
+  document.getElementById('lbImg').src = gImgs[gIdx];
+  setGallery(gIdx);
+}
+
+// ─── KEYBOARD ────────────────────────────────────────────────────────────────
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeLB(); closePanel(); }
+  if (document.getElementById('lightbox').classList.contains('open')) {
+    if (e.key === 'ArrowRight') lbStep(1, e);
+    if (e.key === 'ArrowLeft')  lbStep(-1, e);
+  }
+});
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+renderGrid();
+</script>
+</body>
+</html>
