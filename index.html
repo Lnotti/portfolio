@@ -255,6 +255,20 @@ header {
 .gallery-thumb:hover { opacity: 1; }
 .gallery-thumb img { width: 100%; height: 100%; object-fit: cover; }
 
+.more-section { margin-top: 3rem; }
+.more-section h2 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(24px, 3.4vw, 32px);
+  margin-bottom: 0.5rem;
+}
+.more-note {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+  max-width: 720px;
+  line-height: 1.6;
+}
+
 /* PANEL TEXT */
 .section-label {
   font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .1em;
@@ -317,6 +331,12 @@ header {
   </div>
 
   <div class="grid" id="grid"></div>
+
+  <section class="more-section">
+    <h2>More Projects</h2>
+    <p class="more-note">Less important projects, school assignments, and extra explorations. These are still interactive and available if you want to keep them in the portfolio.</p>
+    <div class="grid" id="moreGrid"></div>
+  </section>
 </div>
 
 <!-- SIDE PANEL -->
@@ -355,8 +375,11 @@ header {
 // and reference them like: images: ['images/ftc-robot.jpg', 'images/ftc-field.jpg']
 
 const PROJECTS = [
+
   {
     id: 'ftc',
+    more: false,
+    images: ['images%3A/FTC/IMG_0411.JPEG', 'images%3A/FTC/IMG_0416.JPEG', 'images%3A/FTC/IMG_2015.jpg'],
     title: 'FTC Competition Robot — Chilla Gorillas',
     tags: ['robotics', 'elec'],
     meta: 'FIRST Tech Challenge · Decode Season · Flywheel shooter · Design and Electrical Lead · 8th / 32 teams',
@@ -374,10 +397,11 @@ Everything was designed in Fusion 360. Also helped secure $500 in sponsorship fu
       'Secured $500 in funding from Marin Sanitary Service',
       'Rolling intake cut before competition — robot ran manual-load only',
     ],
-    images: [],
   },
   {
     id: 'darkstar',
+    more: false,
+    images: [],
     title: 'Dark Star 22 FPV Quad',
     tags: ['fpv', 'elec', '3d'],
     meta: 'GEPRC TAKER F405 · GEP-M80 GPS/mag · Betaflight · ELRS · DJI O4 Pro · BNF mod',
@@ -393,10 +417,11 @@ Worked through Betaflight configuration including a custom firmware cloud build 
       'Hand-soldered GPS and magnetometer directly onto the FC stack',
       'I2C bus debugging: mag_i2c_device config and clock speed tuning',
     ],
-    images: [],
   },
   {
     id: 'nazgul',
+    more: false,
+    images: [],
     title: 'iFlight Nazgul — Assembly and Waterproofing',
     tags: ['fpv', 'elec'],
     meta: 'BNF assembly · Conformal coating · Smoke stopper · FC diagnostics',
@@ -410,10 +435,11 @@ Performed staged submersion testing using a smoke stopper for safety, and diagno
       'Diagnosed USB-C port as the primary water ingress point',
       'SOT-23 component failure requiring FC replacement',
     ],
-    images: [],
   },
   {
     id: 'shelf',
+    more: false,
+    images: ['images%3A/Shelf System/IMG_2103.jpg'],
     title: '3D Printed Wall Mount Shelf System',
     tags: ['3d'],
     meta: 'FDM · Tolerance engineering · Fusion 360 · Iterative prototyping',
@@ -427,10 +453,11 @@ Repeated tolerance failures and design shortcomings forced a real understanding 
       'Designed around printer limitations rather than ideal geometry',
       'First project that produced a real, functional, installed object',
     ],
-    images: [],
   },
   {
     id: 'battery',
+    more: false,
+    images: ['images%3A/FPV/Battery/IMG_2176.jpg', 'images%3A/FPV/Battery/IMG_2177.jpg'],
     title: 'Battery Pack Repair and Custom Li-Ion Builds',
     tags: ['elec'],
     meta: 'Spot welding · Molicell 21700 · 6S1P · LiPo repair · Battery chemistry',
@@ -449,10 +476,11 @@ Along the way, went deep on battery chemistry: the tradeoffs between LiPo and Li
       'Studied LiPo vs Li-Ion chemistry: energy density, C-rating, cycle life, and safe handling',
       'Packs are functional and actively flown for cinematic and long-range flights',
     ],
-    images: [],
   },
   {
     id: 'skittle',
+    more: false,
+    images: ['images%3A/School projects/Skittle sorter/IMG_1352.jpg', 'images%3A/School projects/Skittle sorter/IMG_1398.MOV'],
     title: 'Skittle Color Sorter',
     tags: ['elec', 'software', 'school'],
     meta: 'micro:bit · Color sensor · Servos · Fusion 360 · Laser cut · Freshman year',
@@ -466,10 +494,11 @@ The enclosure was designed in Fusion 360 and laser cut. The finished machine ach
       'Roughly 70% sorting accuracy on final build',
       'Received an A on the project',
     ],
-    images: [],
   },
   {
     id: 'studyapp',
+    more: false,
+    images: [],
     title: 'Offline AI Study App — Hackathon',
     tags: ['software'],
     meta: 'Python · Ollama · Local LLM · Vibe coded · Honorable Mention',
@@ -484,10 +513,11 @@ The hackathon encouraged using AI to write the code, so the entire app was vibe-
       'Partner handled the presentation',
       'Awarded Honorable Mention',
     ],
-    images: [],
   },
   {
     id: 'doodlejump',
+    more: false,
+    images: [],
     title: 'Doodle Jump Recreation — Python',
     tags: ['software', 'school'],
     meta: 'Python · Pygame · APCSP · AP exam portfolio submission · Freshman year',
@@ -502,10 +532,11 @@ Submitted as the official APCSP portfolio piece demonstrating programming concep
       'Collision detection for platforms and game state management',
       'Freshman year — first large solo programming project',
     ],
-    images: [],
   },
   {
     id: 'rocket',
+    more: false,
+    images: ['images%3A/School projects/Rocket/IMG_0855.MOV', 'images%3A/School projects/Rocket/IMG_1054.MOV', 'images%3A/School projects/Rocket/IMG_1150.MOV'],
     title: 'Model Rocket',
     tags: ['school'],
     meta: 'CAD · Lathe · Altimeter · Engineering class',
@@ -520,10 +551,11 @@ Launch went well until the parachute failed on descent, sending the rocket nose-
       'Parachute failure on descent — rocket buried nose-first in mud',
       'Altimeter data lost on impact',
     ],
-    images: [],
   },
   {
     id: 'lamp',
+    more: false,
+    images: ['images%3A/School projects/Edge lit lamp/IMG_1284.jpg', 'images%3A/School projects/Edge lit lamp/IMG_1285.jpg', 'images%3A/School projects/Edge lit lamp/IMG_1287.jpg'],
     title: 'Edge-Lit Acrylic Lamp',
     tags: ['school', 'elec'],
     meta: 'Laser engraving · Acrylic · USB-C · RGB LED · Milled wood case · Engineering class',
@@ -536,10 +568,11 @@ The electronics were straightforward: a USB-C adapter wired through a switch to 
       'USB-C power input wired through a switch to a multicolor LED',
       'Wood case milled and stained for a clean finish',
     ],
-    images: [],
   },
   {
     id: 'bridge',
+    more: false,
+    images: ['images%3A/Bridge/IMG_2012.PNG'],
     title: 'Structural Bridge',
     tags: ['school'],
     meta: 'CAD · FEA simulation · Wood rod · Manila folder gussets · ~80 lb load · Engineering class',
@@ -554,10 +587,11 @@ The bridge held approximately 80 lbs in load testing. Did not win the competitio
       'Held approximately 80 lbs in load testing',
       'Earned an A on the project but unfortuantely did not win the competition',
     ],
-    images: [],
   },
   {
     id: 'pid',
+    more: false,
+    images: [],
     title: 'FPV Drone PID and Filter Tuning',
     tags: ['fpv', 'elec'],
     meta: 'Betaflight · PID tuning · RPM filters · Blackbox · Motor noise · Frame resonance',
@@ -574,10 +608,11 @@ The filter side was equally involved. Identifying and suppressing motor noise an
       'Balanced gyro lowpass filtering against phase delay and control responsiveness',
       'Read and interpreted Blackbox flight logs to diagnose oscillation and propwash',
     ],
-    images: [],
   },
   {
     id: 'serial',
+    more: false,
+    images: [],
     title: 'Serial Protocols and RF Theory — Self-Taught',
     tags: ['fpv', 'elec'],
     meta: 'UART · I2C · ELRS · RF propagation · Link budget · Self-directed',
@@ -595,7 +630,6 @@ Curiosity about the radio link and wanting to maximize range and obstacle penetr
       'ELRS LoRa modulation: long range at low transmit power',
       'Link budget fundamentals: RSSI, SNR, sensitivity, and fade margin',
     ],
-    images: [],
   },
 ];
 
@@ -614,23 +648,25 @@ function badge(id) {
 
 // ─── RENDER GRID ──────────────────────────────────────────────────────────────
 function isVideo(src) { return /\.(mp4|webm|mov)(\?|$)/i.test(src); }
+function isHEIC(src) { return /\.(heic)(\?|$)/i.test(src); }
 
 function mediaThumbHTML(src, title) {
   if (isVideo(src)) {
     return `<video src="${src}" muted playsinline preload="metadata" style="width:100%;height:100%;object-fit:cover;" title="${title}"></video>`;
   }
+  if (isHEIC(src)) {
+    return `<span class="card-thumb-placeholder">[ HEIC image ]</span>`;
+  }
   return `<img src="${src}" alt="${title}" loading="lazy">`;
 }
-function renderGrid() {
-  const grid = document.getElementById('grid');
-  grid.innerHTML = PROJECTS.map(p => {
-    const hasImg = p.images && p.images.length > 0;
-    const thumb  = hasImg
-      ? mediaThumbHTML(p.images[0], p.title)
-      : `<span class="card-thumb-placeholder">[ no image yet ]</span>`;
-    const photoCount = hasImg && p.images.length > 1
-      ? `<span class="card-photo-count">+${p.images.length - 1} photos</span>` : '';
-    return `<div class="card" data-id="${p.id}" data-tags="${(p.tags||[]).join(',')}" onclick="openPanel('${p.id}')">
+function projectCardHTML(p) {
+  const hasImg = p.images && p.images.length > 0;
+  const thumb  = hasImg
+    ? mediaThumbHTML(p.images[0], p.title)
+    : `<span class="card-thumb-placeholder">[ no image yet ]</span>`;
+  const photoCount = hasImg && p.images.length > 1
+    ? `<span class="card-photo-count">+${p.images.length - 1} photos</span>` : '';
+  return `<div class="card" data-id="${p.id}" data-tags="${(p.tags||[]).join(',')}" onclick="openPanel('${p.id}')">
       <div class="card-thumb">${thumb}${photoCount}</div>
       <div class="card-body">
         <div class="card-tags">${(p.tags||[]).map(badge).join('')}</div>
@@ -640,7 +676,16 @@ function renderGrid() {
         <div class="card-cta">View project →</div>
       </div>
     </div>`;
-  }).join('');
+}
+
+function renderGrid() {
+  const grid = document.getElementById('grid');
+  const moreGrid = document.getElementById('moreGrid');
+  const mainProjects = PROJECTS.filter(p => !p.more);
+  const moreProjects = PROJECTS.filter(p => p.more);
+
+  grid.innerHTML = mainProjects.map(projectCardHTML).join('');
+  moreGrid.innerHTML = moreProjects.map(projectCardHTML).join('');
   updateCount();
 }
 
@@ -707,11 +752,17 @@ function renderGallery() {
     if (isVideo(src)) {
       return `<video id="gMain" src="${src}" controls playsinline style="width:100%;height:100%;object-fit:contain;background:#000;cursor:default;" preload="metadata"></video>`;
     }
+    if (isHEIC(src)) {
+      return `<div class="gallery-main"><div class="gallery-placeholder">HEIC image file. Convert to JPG/PNG for browser preview.</div></div>`;
+    }
     return `<img id="gMain" src="${src}" onclick="openLB(${idx})" style="cursor:zoom-in;">`;
   }
 
   function stripThumbHTML(src, i) {
     const active = i === 0 ? 'active' : '';
+    if (isHEIC(src)) {
+      return `<div class="gallery-thumb ${active}" onclick="setGallery(${i})"><span class="card-thumb-placeholder">HEIC</span></div>`;
+    }
     const inner = isVideo(src)
       ? `<video src="${src}" muted preload="metadata" style="width:100%;height:100%;object-fit:cover;pointer-events:none;"></video>`
       : `<img src="${src}" loading="lazy">`;
