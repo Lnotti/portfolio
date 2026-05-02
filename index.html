@@ -357,18 +357,22 @@ header {
 const PROJECTS = [
   {
     id: 'ftc',
-    title: 'FTC Competition Robot',
+    title: 'FTC Competition Robot — Chilla Gorillas',
     tags: ['robotics', 'elec'],
-    meta: 'FTC · Mechanical & electrical design · Programming · Java',
-    desc: `Designed and built a competitive robot for FIRST Tech Challenge (FTC). Involved mechanical design, electronics integration, and programming to meet the season's game objectives.
+    meta: 'FIRST Tech Challenge · Decode Season · Flywheel shooter · Design and Electrical Lead · 8th / 32 teams',
+    desc: `Served as Design Lead, Electrical Lead, and VP for the Chilla Gorillas FTC team during the Decode season. The robot was a top-loaded flywheel shooter, designed, iterated, and built largely independently with guidance from Leo, the team founder.
 
-[Add your season, team number, what game it was, what mechanisms you built — intake, arm, drivetrain, autonomous, etc.]`,
+The flywheel system went through many iterations but ultimately never performed as well as hoped. Unexpected friction losses, even after designing and printing a custom gearbox, kept the RPM lower than needed for consistent shooting. It was still one of only two functional subsystems on the robot, alongside the drivetrain. A rolling intake was designed and attempted but could not be finished in time for competition, so the final robot ran as manual-load only. The team placed 8th out of 32 at the Saratoga Regional Competition.
+
+Everything was designed in Fusion 360. Also helped secure $500 in sponsorship funding from Marin Sanitary Service. Have since stepped down from the team after leaving SRHS where the team was founded, and now serve as a consultant.`,
     highlights: [
-      'FIRST Tech Challenge — Season [add season name]',
-      'Team [add number] · [add your role on the team]',
-      '[Add: drivetrain type and key mechanisms]',
-      '[Add: autonomous capabilities]',
-      '[Add: competition results and any awards]',
+      'Design Lead, Electrical Lead, and VP for Chilla Gorillas FTC',
+      'Designed and built the flywheel shooter largely solo with mentorship from the team founder',
+      'Custom 3D printed gearbox designed to address RPM losses — friction remained an issue',
+      'Placed 8th out of 32 teams in the Decode season',
+      'All mechanical design done in Fusion 360',
+      'Secured $500 in funding from Marin Sanitary Service',
+      'Rolling intake cut before competition — robot ran manual-load only',
     ],
     images: [],
   },
@@ -376,34 +380,35 @@ const PROJECTS = [
     id: 'darkstar',
     title: 'Dark Star 22 FPV Quad',
     tags: ['fpv', 'elec', '3d'],
-    meta: 'GEPRC TAKER F405 · GEP-M80 GPS/mag · Betaflight · ELRS · DJI O4 Pro',
-    desc: `Built and debugged a long-range FPV quad on the GEPRC TAKER F405 AIO. Designed and 3D printed a custom GPS mount, then soldered the GPS and magnetometer directly onto the stack.
+    meta: 'GEPRC TAKER F405 · GEP-M80 GPS/mag · Betaflight · ELRS · DJI O4 Pro · BNF mod',
+    desc: `One of three FPV builds, the Dark Star 22 started as a BNF (bind-and-fly) quad and was heavily modified for long-range use. Designed and 3D printed a custom GPS mount, then soldered the GPS and magnetometer directly onto the stack.
 
 Worked through Betaflight configuration including a custom firmware cloud build with magnetometer support enabled, and deep I2C bus debugging to get the GEP-M80 communicating reliably on the STM32F405.`,
     highlights: [
-      'GEPRC TAKER F405 AIO · ICM42688P gyro · DPS310 baro',
+      'BNF quad modified extensively for long-range use',
+      'GEPRC TAKER F405 AIO with ICM42688P gyro and DPS310 baro',
       'DJI O4 Pro video with ELRS long-range control link',
       'Custom Betaflight cloud firmware build with USE_MAG enabled',
       '3D printed PETG GPS mast with foam vibration isolation',
       'Hand-soldered GPS and magnetometer directly onto the FC stack',
-      'I2C bus debugging — mag_i2c_device config and clock speed tuning',
+      'I2C bus debugging: mag_i2c_device config and clock speed tuning',
     ],
     images: [],
   },
   {
-    id: 'borz',
-    title: 'iFlight Borz 7 Mini — Assembly & Waterproofing',
+    id: 'nazgul',
+    title: 'iFlight Nazgul — Assembly and Waterproofing',
     tags: ['fpv', 'elec'],
-    meta: 'Full assembly · Conformal coating · Smoke stopper · FC diagnostics',
-    desc: `Assembled the iFlight Borz 7 Mini from components and then took on a full waterproofing modification using silicone conformal coating applied to all electronics.
+    meta: 'BNF assembly · Conformal coating · Smoke stopper · FC diagnostics',
+    desc: `One of three FPV builds. The Nazgul was purchased as a BNF, assembled, and then taken on as a waterproofing project using silicone conformal coating applied across all electronics.
 
-Performed staged submersion testing using a smoke stopper for safety, and diagnosed the USB-C port as the primary water ingress point. The project ultimately ended with a SOT-23 component on the FC smoking during testing — a hard lesson in the limits of consumer electronics waterproofing.`,
+Performed staged submersion testing using a smoke stopper for safety, and diagnosed the USB-C port as the primary water ingress point. The project ended with a SOT-23 component on the FC smoking during testing, requiring a full FC replacement. After replacement, the waterproofing held up to further submersion tests with no additional failures, validating the coating process. I am yet to test it in salt water, which was the origional intention so I could fly it in my pool.`,
     highlights: [
-      'Full assembly of iFlight Borz 7 Mini from component level',
+      'BNF purchased and fully assembled',
       'Silicone conformal coating applied across all electronics',
       'Smoke stopper used throughout staged submersion testing',
       'Diagnosed USB-C port as the primary water ingress point',
-      'SOT-23 component failure — learned FC-level failure analysis',
+      'SOT-23 component failure requiring FC replacement',
     ],
     images: [],
   },
@@ -412,13 +417,13 @@ Performed staged submersion testing using a smoke stopper for safety, and diagno
     title: '3D Printed Wall Mount Shelf System',
     tags: ['3d'],
     meta: 'FDM · Tolerance engineering · Fusion 360 · Iterative prototyping',
-    desc: `Designed and printed a modular wall-mounted shelf system entirely from scratch. What started as a practical problem turned into the most formative 3D printing project so far.
+    desc: `Designed and printed a modular wall-mounted shelf system from scratch. What started as a practical problem turned into the most formative 3D printing project so far.
 
-Repeated tolerance failures and design shortcomings forced a real understanding of FDM printing's constraints — how walls warp, why snap-fits need clearance, how layer orientation changes part strength, and when 3D printing is the wrong tool entirely. This was the project that made 3D printing click.`,
+Repeated tolerance failures and design shortcomings forced a real understanding of FDM printing's constraints: how walls warp, why snap-fits need clearance, how layer orientation affects part strength in different directions, and when 3D printing is simply the wrong tool. This was the project that made 3D printing click.`,
     highlights: [
       'Learned FDM tolerance requirements through real print failures',
       'Iterated on snap-fit and wall-mount geometry across multiple revisions',
-      'Understood layer anisotropy and its effect on part strength',
+      'Understood how layer orientation affects part strength in different load directions',
       'Designed around printer limitations rather than ideal geometry',
       'First project that produced a real, functional, installed object',
     ],
@@ -426,34 +431,40 @@ Repeated tolerance failures and design shortcomings forced a real understanding 
   },
   {
     id: 'battery',
-    title: 'Custom Battery Pack Builds',
+    title: 'Battery Pack Repair and Custom Li-Ion Builds',
     tags: ['elec'],
-    meta: 'Spot welding · BMS integration · Cell matching · 18650 / 21700',
-    desc: `Built custom lithium-ion battery packs from individual cells — covering the full process from cell selection and capacity matching to spot welding, BMS wiring, and finished pack assembly.
+    meta: 'Spot welding · Molicell 21700 · 6S1P · LiPo repair · Battery chemistry',
+    desc: `Started with LiPo repair after a prop strike severed the balance leads on a 6S pack. Repairing it required understanding how balance leads work, what each cell tap does, and how a BMS and charger use that data to monitor individual cell voltages and health.
 
-[Add more detail — what were the packs for? What cell chemistry, voltage, and capacity? Any balance leads, XT60 connectors, custom enclosures?]`,
+From there, moved into building custom Li-Ion packs from scratch using Molicell high-current 21700 cells. Spot welded the nickel strip interconnects, hand-soldered the balance leads, and configured the cells into a 6S1P arrangement delivering 5000mAh at high discharge rates suitable for FPV. These packs are functional and actively flown.
+
+Along the way, went deep on battery chemistry: the tradeoffs between LiPo and Li-Ion in terms of energy density, discharge rate, cycle life, and internal resistance; how to safely handle, store, and charge lithium cells; and why damaged or over-discharged LiPos are particularly spicy.`,
     highlights: [
-      'Cell selection and capacity matching for pack consistency',
-      'Spot welding nickel strips for inter-cell connections',
-      'BMS integration for overcharge and over-discharge protection',
-      '[Add: pack specs — voltage, capacity, cell type]',
-      '[Add: what the packs were built for]',
+      'Repaired 6S LiPo with balance leads severed by a prop strike',
+      'Learned how balance leads work and how chargers use them for per-cell monitoring',
+      'Built custom packs from Molicell high-current 21700 cells',
+      'Spot welded nickel strip connections between cells',
+      'Hand-soldered balance leads onto each cell group',
+      '6S1P configuration delivering 5000mAh at high discharge (60A continuous theoretical only tested to 30A continuous 60A burst) for FPV use',
+      'Studied LiPo vs Li-Ion chemistry: energy density, C-rating, cycle life, and safe handling',
+      'Packs are functional and actively flown for cinematic and long-range flights',
     ],
     images: [],
   },
   {
     id: 'skittle',
     title: 'Skittle Color Sorter',
-    tags: ['elec', 'software'],
-    meta: 'Color sensing · Servo control · Embedded systems · [add MCU]',
-    desc: `Built an automated machine that sorts Skittles by color. Combined a mechanical dispensing mechanism, a color sensor, and embedded firmware to detect each candy and route it to the correct output bin.
+    tags: ['elec', 'software', 'school'],
+    meta: 'micro:bit · Color sensor · Servos · Fusion 360 · Laser cut · Freshman year',
+    desc: `Built an automated Skittle sorter freshman year as a class project. Used a micro:bit with an attached color sensor to detect each candy's color, then triggered servos to route it to the correct bin.
 
-[Add: what microcontroller, sensor type, how the mechanical sorting works, accuracy, speed, what you learned from it.]`,
+The enclosure was designed in Fusion 360 and laser cut. The finished machine achieved around 70% sorting accuracy, good enough for an A on the project.`,
     highlights: [
-      '[Add: microcontroller — Arduino, ESP32, etc.]',
-      '[Add: color sensor type and detection method]',
-      '[Add: mechanical sorting mechanism]',
-      '[Add: accuracy, throughput, and key challenges]',
+      'micro:bit with color sensor for candy detection',
+      'Servos actuate the sorting mechanism based on detected color',
+      'Enclosure designed in Fusion 360 and laser cut out of cardboard',
+      'Roughly 70% sorting accuracy on final build',
+      'Received an A on the project',
     ],
     images: [],
   },
@@ -462,17 +473,15 @@ Repeated tolerance failures and design shortcomings forced a real understanding 
     title: 'Offline AI Study App — Hackathon',
     tags: ['software'],
     meta: 'Python · Ollama · Local LLM · Vibe coded · Honorable Mention',
-    desc: `Built an AI-powered study application during a hackathon themed "AI for Good." The core idea: lower-income students often lack internet access at home, but they do have access at school. By running a local LLM through Ollama entirely on-device, a student could download the app at school and use a fully functional AI study assistant at home — no internet, no subscription, no cost.
+    desc: `Built an AI-powered study application during a hackathon themed "AI for Good." The core idea: lower-income students often lack internet access at home, but they do have access at school. By running a local LLM through Ollama entirely on-device, a student could download the app at school and use a fully functional AI study assistant at home with no internet.
 
-The hackathon encouraged using AI to write the code, so the entire app was vibe-coded over roughly 8 hours while a partner handled the presentation. The app itself turned out far better than the slide deck — which earned an honorable mention from the judges.
-
-The project had a real mission behind it: making AI tutoring accessible to kids who are usually left out of the tools that could help them most.`,
+The hackathon encouraged using AI to write the code, so the entire app was vibe-coded solo over roughly 8 hours while a partner handled the presentation. The app itself turned out far better than the slide deck. The project earned an honorable mention from the judges.`,
     highlights: [
       'Hackathon theme: "AI for Good"',
-      'Designed for students without home internet — fully offline after download',
-      'Powered by Ollama running a local LLM — no API calls, no cloud dependency',
-      'Entire app vibe-coded solo in ~8 hours during the hackathon',
-      'Partner handled the presentation side',
+      'Designed for students without home internet — fully offline after one-time download',
+      'Powered by Ollama running a local LLM with no API calls or cloud dependency',
+      'Entire app vibe-coded solo in roughly 8 hours',
+      'Partner handled the presentation',
       'Awarded Honorable Mention',
     ],
     images: [],
@@ -481,15 +490,17 @@ The project had a real mission behind it: making AI tutoring accessible to kids 
     id: 'doodlejump',
     title: 'Doodle Jump Recreation — Python',
     tags: ['software', 'school'],
-    meta: 'Python · Pygame · Game physics · CS final project',
-    desc: `Recreated the classic mobile game Doodle Jump in Python as a CS final project. Built the full game from scratch — game loop, physics, procedural platform generation, collision detection, and player controls.
+    meta: 'Python · Pygame · APCSP · AP exam portfolio submission · Freshman year',
+    desc: `Recreated the classic mobile game Doodle Jump in Python as the Create Performance Task for the AP Computer Science Principles exam freshman year. Built the full game from scratch: game loop, physics, procedural platform generation, collision detection, and player controls.
 
-Demonstrated that you can build something genuinely fun from first principles, applying core CS concepts in a practical context under a real deadline.`,
+Submitted as the official APCSP portfolio piece demonstrating programming concepts including abstraction, algorithms, and iterative development. The code is still intact and the game is still runnable.`,
     highlights: [
-      'Full game loop built from scratch using Pygame',
+      'AP Computer Science Principles Create Performance Task submission',
+      'Full game built from scratch in Python using Pygame',
       'Physics system for jump arc and gravity',
       'Procedural platform generation for infinite vertical scrolling',
-      'Collision detection for platforms, enemies, and power-ups',
+      'Collision detection for platforms and game state management',
+      'Freshman year — first large solo programming project',
     ],
     images: [],
   },
@@ -497,15 +508,17 @@ Demonstrated that you can build something genuinely fun from first principles, a
     id: 'rocket',
     title: 'Model Rocket',
     tags: ['school'],
-    meta: 'Aerodynamics · Propulsion · Structural design · Engineering class',
-    desc: `Designed and built a model rocket for a school engineering project, applying aerodynamic principles, structural design, and safe launch procedures.
+    meta: 'CAD · Lathe · Altimeter · Engineering class',
+    desc: `Designed a model rocket in CAD and built it by hand, including a lathe-turned wax nose cone with an altimeter housed inside. The CAD served as a planning reference; the final build was constructed from scratch.
 
-[Add: engine type, altitude or apogee reached, materials used, onboard electronics like an altimeter or camera, any notable results or failures.]`,
+Launch went well until the parachute failed on descent, sending the rocket nose-first into the mud. The altimeter survived but the data was lost. A good lesson in recovery system reliability.`,
     highlights: [
-      '[Add: engine class and thrust rating]',
-      '[Add: altitude reached or estimated]',
-      '[Add: materials and construction method]',
-      '[Add: any onboard instrumentation]',
+      'Limited aero simulation in openrocket',
+      'Rocket designed in CAD from scratch',
+      'Nose cone lathe-turned from wax',
+      'Altimeter integrated inside the nose cone',
+      'Parachute failure on descent — rocket buried nose-first in mud',
+      'Altimeter data lost on impact',
     ],
     images: [],
   },
@@ -513,15 +526,15 @@ Demonstrated that you can build something genuinely fun from first principles, a
     id: 'lamp',
     title: 'Edge-Lit Acrylic Lamp',
     tags: ['school', 'elec'],
-    meta: 'LED electronics · Acrylic fabrication · Circuit design · Engineering class',
-    desc: `Designed and built an edge-lit acrylic lamp. LEDs placed along the edge of an acrylic panel create total internal reflection, illuminating any engraved or etched design on the surface from within.
+    meta: 'Laser engraving · Acrylic · USB-C · RGB LED · Milled wood case · Engineering class',
+    desc: `Designed and built an edge-lit acrylic lamp. The acrylic panel was laser engraved with a design, then LEDs along the edge illuminate it through total internal reflection, making only the engraved surface glow.
 
-[Add: how the acrylic was cut or engraved, what the design was, circuit details — power supply, resistors, LED type, any dimming or color control.]`,
+The electronics were straightforward: a USB-C adapter wired through a switch to a multicolor LED. The case was milled out of wood and stained for a clean finished look.`,
     highlights: [
-      'Uses total internal reflection to light surface engravings',
-      '[Add: engraving method — laser, hand-etched, CNC]',
-      '[Add: circuit design — LED type, resistors, power supply]',
-      '[Add: any controls — dimming, color, PWM]',
+      'Interchangeable acrylic panels laser engraved with custom designs',
+      'Edge lighting via internal reflection',
+      'USB-C power input wired through a switch to a multicolor LED',
+      'Wood case milled and stained for a clean finish',
     ],
     images: [],
   },
@@ -529,15 +542,58 @@ Demonstrated that you can build something genuinely fun from first principles, a
     id: 'bridge',
     title: 'Structural Bridge',
     tags: ['school'],
-    meta: 'Structural engineering · Load testing · Truss design · Engineering class',
-    desc: `Engineered and built a structural bridge optimized for maximum load-bearing capacity relative to its own weight, applying truss geometry and structural principles to maximize efficiency.
+    meta: 'CAD · FEA simulation · Wood rod · Manila folder gussets · ~80 lb load · Engineering class',
+    desc: `Designed a structural bridge in CAD, then used simulation for the first time to run finite element analysis and identify weak points before building. Working with a fixed material budget — a limited number of wood rods for members and manila folder strips for gussets — the simulation results directly informed where to reinforce.
 
-[Add: material — balsa, popsicle sticks, pasta? Load achieved. Design decisions made. Anything that failed and what you took from it.]`,
+The bridge held approximately 80 lbs in load testing. Did not win the competition but earned an A, and the simulation-driven design process was the real takeaway.`,
     highlights: [
-      '[Add: material and construction method]',
-      '[Add: truss type — Pratt, Howe, Warren, etc.]',
-      '[Add: max load achieved in testing]',
-      '[Add: efficiency ratio — load / bridge weight]',
+      'Designed entirely in CAD before building',
+      'First use of FEA simulation to identify structural weak points',
+      'Fixed material budget: wood rods and manila folder gussets only',
+      'Reinforcement placed precisely where simulation flagged failures',
+      'Held approximately 80 lbs in load testing',
+      'Earned an A on the project but unfortuantely did not win the competition',
+    ],
+    images: [],
+  },
+  {
+    id: 'pid',
+    title: 'FPV Drone PID and Filter Tuning',
+    tags: ['fpv', 'elec'],
+    meta: 'Betaflight · PID tuning · RPM filters · Blackbox · Motor noise · Frame resonance',
+    desc: `Spent a significant amount of time tuning the flight controllers across all three FPV builds, which turned into a deep self-directed education in control systems.
+
+Learning to use PID controllers properly meant reading Blackbox logs, identifying oscillation signatures in the gyro traces, adjusting one term at a time, and re-flying to observe the result. It took a long time to develop the intuition for what each change does to the physical system.
+
+The filter side was equally involved. Identifying and suppressing motor noise and frame resonance required understanding how RPM filters work to notch out motor harmonics at their exact frequencies, how gyro lowpass filters clean the input signal, and the tradeoff between noise rejection and the phase delay that hurts control responsiveness. Getting noise sources identified and filtered correctly without washing out the gyro signal took significant iteration.`,
+    highlights: [
+      'Tuned PID controllers across all three FPV builds through iterative Blackbox analysis',
+      'Learned to use PID controllers and understand their effect on a physical system',
+      'Identified motor noise and frame resonance as noise sources in gyro data',
+      'Configured RPM filters to notch motor harmonics at exact frequencies',
+      'Balanced gyro lowpass filtering against phase delay and control responsiveness',
+      'Read and interpreted Blackbox flight logs to diagnose oscillation and propwash',
+    ],
+    images: [],
+  },
+  {
+    id: 'serial',
+    title: 'Serial Protocols and RF Theory — Self-Taught',
+    tags: ['fpv', 'elec'],
+    meta: 'UART · I2C · ELRS · RF propagation · Link budget · Self-directed',
+    desc: `Debugging FPV builds, particularly getting the GPS, magnetometer, and other peripherals communicating with the flight controller, forced a real understanding of how serial protocols work at a practical level.
+
+UART was first: baud rate, TX/RX wiring, why lines need to be crossed, and how to read Betaflight's ports configuration. I2C came through the magnetometer debugging: clock and data lines, pull-up resistors, device addressing, and why the I2C bus can silently fail when clock speed is mismatched with a peripheral's specification.
+
+Curiosity about the radio link and wanting to maximize range and obstacle penetration led into RF theory: how antenna gain and radiation patterns work, why circular polarization helps in a dynamic environment, the difference between 2.4GHz and 900MHz propagation, how ELRS uses LoRa modulation to achieve long range at low power, and how to think about link budget in terms of RSSI, SNR, and fade margin. None of this was assigned — it came from wanting to understand what was actually happening.`,
+    highlights: [
+      'UART: baud rate, port config, TX/RX wiring, Betaflight serial setup',
+      'I2C: clock/data lines, pull-up resistors, device addressing, clock speed debugging',
+      'Diagnosed real peripheral failures using protocol-level understanding',
+      'Studied RF propagation: antenna gain, radiation patterns, circular vs linear polarization',
+      '2.4GHz vs 900MHz: penetration, range, and multipath characteristics',
+      'ELRS LoRa modulation: long range at low transmit power',
+      'Link budget fundamentals: RSSI, SNR, sensitivity, and fade margin',
     ],
     images: [],
   },
@@ -557,12 +613,20 @@ function badge(id) {
 }
 
 // ─── RENDER GRID ──────────────────────────────────────────────────────────────
+function isVideo(src) { return /\.(mp4|webm|mov)(\?|$)/i.test(src); }
+
+function mediaThumbHTML(src, title) {
+  if (isVideo(src)) {
+    return `<video src="${src}" muted playsinline preload="metadata" style="width:100%;height:100%;object-fit:cover;" title="${title}"></video>`;
+  }
+  return `<img src="${src}" alt="${title}" loading="lazy">`;
+}
 function renderGrid() {
   const grid = document.getElementById('grid');
   grid.innerHTML = PROJECTS.map(p => {
     const hasImg = p.images && p.images.length > 0;
     const thumb  = hasImg
-      ? `<img src="${p.images[0]}" alt="${p.title}" loading="lazy">`
+      ? mediaThumbHTML(p.images[0], p.title)
       : `<span class="card-thumb-placeholder">[ no image yet ]</span>`;
     const photoCount = hasImg && p.images.length > 1
       ? `<span class="card-photo-count">+${p.images.length - 1} photos</span>` : '';
@@ -635,25 +699,47 @@ function closePanel() {
 function renderGallery() {
   const el = document.getElementById('panelGallery');
   if (!gImgs.length) {
-    el.innerHTML = `<div class="gallery-main"><div class="gallery-placeholder">No images added yet.<br><span style="font-size:10px;opacity:.6;">Add image URLs to this project's <code>images</code> array in the HTML file.</span></div></div>`;
+    el.innerHTML = `<div class="gallery-main"><div class="gallery-placeholder">No images added yet.<br><span style="font-size:10px;opacity:.6;">Add file paths to this project's <code>images</code> array in the HTML file.<br>Supports .jpg .png .gif .mp4 .webm .mov</span></div></div>`;
     return;
   }
+
+  function mainMediaHTML(src, idx) {
+    if (isVideo(src)) {
+      return `<video id="gMain" src="${src}" controls playsinline style="width:100%;height:100%;object-fit:contain;background:#000;cursor:default;" preload="metadata"></video>`;
+    }
+    return `<img id="gMain" src="${src}" onclick="openLB(${idx})" style="cursor:zoom-in;">`;
+  }
+
+  function stripThumbHTML(src, i) {
+    const active = i === 0 ? 'active' : '';
+    const inner = isVideo(src)
+      ? `<video src="${src}" muted preload="metadata" style="width:100%;height:100%;object-fit:cover;pointer-events:none;"></video>`
+      : `<img src="${src}" loading="lazy">`;
+    return `<div class="gallery-thumb ${active}" onclick="setGallery(${i})">${inner}</div>`;
+  }
+
   const strip = gImgs.length > 1
-    ? `<div class="gallery-strip">${gImgs.map((s,i) =>
-        `<div class="gallery-thumb ${i===0?'active':''}" onclick="setGallery(${i})"><img src="${s}" loading="lazy"></div>`
-      ).join('')}</div>` : '';
-  el.innerHTML = `<div class="gallery-main"><img id="gMain" src="${gImgs[0]}" onclick="openLB(${0})"></div>${strip}`;
+    ? `<div class="gallery-strip">${gImgs.map((s, i) => stripThumbHTML(s, i)).join('')}</div>` : '';
+  el.innerHTML = `<div class="gallery-main">${mainMediaHTML(gImgs[0], 0)}</div>${strip}`;
 }
 
 function setGallery(idx) {
   gIdx = idx;
-  const img = document.getElementById('gMain');
-  if (img) { img.src = gImgs[idx]; img.onclick = () => openLB(idx); }
+  const src = gImgs[idx];
+  const main = document.querySelector('.gallery-main');
+  if (main) {
+    if (isVideo(src)) {
+      main.innerHTML = `<video id="gMain" src="${src}" controls playsinline style="width:100%;height:100%;object-fit:contain;background:#000;" preload="metadata"></video>`;
+    } else {
+      main.innerHTML = `<img id="gMain" src="${src}" onclick="openLB(${idx})" style="cursor:zoom-in;">`;
+    }
+  }
   document.querySelectorAll('.gallery-thumb').forEach((t,i) => t.classList.toggle('active', i===idx));
 }
 
 // ─── LIGHTBOX ────────────────────────────────────────────────────────────────
 function openLB(idx) {
+  if (isVideo(gImgs[idx])) return; // videos play inline, no lightbox
   gIdx = idx;
   document.getElementById('lbImg').src = gImgs[idx];
   document.getElementById('lbPrev').style.display = gImgs.length > 1 ? '' : 'none';
