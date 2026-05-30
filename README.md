@@ -36,7 +36,7 @@ Just open `index.html` in a browser. Everything else is baked in.
 - CSS Flexbox for layout
 - No external dependencies beyond Google Fonts
 
-Built without bloat because I prefer things that load fast and don't require a build step.
+Built without bloat because I prefer things that load fast and I don't know how to properly use web tools.
 
 ## Projects are organized by
 
