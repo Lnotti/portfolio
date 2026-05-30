@@ -2,7 +2,7 @@
 
 WORK IN PROGRESS, expect more porjects and updates
 
-A collection of my engineering and robotics projects. Built as a single-file HTML site because I wanted something clean, fast, and without unnecessary dependencies.
+A collection of my engineering and robotics projects. Built as a single-file HTML site.
 
 ## What's in here
 
@@ -18,6 +18,7 @@ A collection of my engineering and robotics projects. Built as a single-file HTM
 **School Projects**
 - Edge-lit lamp with custom enclosure
 - Skittle sorter (vision-guided sorting system)
+- Rocket
 
 **Hardware & Fabrication**
 - Custom mechanical designs
