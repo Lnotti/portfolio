@@ -644,7 +644,7 @@ if not lost:
 
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="handleLbClick(event)">
-  <button class="lb-close" onclick="closeLB()">? Close</button>
+  <button class="lb-close" onclick="closeLB()">X Close</button>
   <button class="lb-nav" id="lbPrev" onclick="lbStep(-1,event)">&#8592;</button>
   <img id="lbImg" src="" alt="">
   <button class="lb-nav" id="lbNext" onclick="lbStep(1,event)">&#8594;</button>
@@ -856,7 +856,7 @@ The electronics were straightforward: a USB-C adapter wired through a switch to 
   },
   {
     id: 'bridge',
-    more: false,
+    more: true,
     images: ['images/Bridge/IMG_2012.PNG'],
     title: 'Structural Bridge',
     tags: ['school'],
@@ -875,7 +875,7 @@ The bridge held approximately 80 lbs in load testing. Did not win the competitio
   },
   {
     id: 'pid',
-    more: false,
+    more: true,
     images: [],
     title: 'FPV Drone PID and Filter Tuning',
     tags: ['fpv', 'elec'],
@@ -896,7 +896,7 @@ The filter side was equally involved. Identifying and suppressing motor noise an
   },
   {
     id: 'serial',
-    more: false,
+    more: true,
     images: [],
     title: 'Serial Protocols and RF Theory - Self-Taught',
     tags: ['fpv', 'elec'],
