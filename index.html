@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Luca — Engineering Portfolio</title>
+<title>Luca - Engineering Portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -256,6 +256,72 @@ header {
 .gallery-thumb:hover { opacity: 1; }
 .gallery-thumb img { width: 100%; height: 100%; object-fit: cover; }
 
+.game-embed {
+  margin-bottom: 2rem;
+}
+.game-embed-header {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-subtle);
+  margin-bottom: .75rem;
+}
+.game-frame-wrap {
+  width: 100%; aspect-ratio: 16/9;
+  background: var(--surface2); border: 1px solid var(--border-soft);
+  border-radius: var(--radius); overflow: hidden;
+  margin-bottom: .9rem;
+}
+.game-frame-wrap iframe {
+  width: 100%; height: 100%; border: 0;
+}
+.game-actions {
+  display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: .6rem;
+}
+.game-action-btn {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; padding: 10px 14px;
+  border-radius: 20px; border: 1px solid var(--border);
+  background: var(--surface2); color: var(--text);
+  cursor: pointer; text-decoration: none;
+}
+.game-action-link {
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.game-action-btn:hover,
+.game-action-link:hover {
+  border-color: var(--accent); color: var(--accent);
+}
+.game-note {
+  font-size: 12px; color: var(--text-muted); line-height: 1.6;
+}
+.code-section {
+  margin-bottom: 2rem;
+}
+.code-subsection {
+  margin-bottom: 1.2rem;
+}
+.code-subheading {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-subtle);
+  margin-bottom: .6rem;
+}
+.code-block {
+  width: 100%; padding: 1rem;
+  background: var(--surface2);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  overflow-x: auto;
+  white-space: pre;
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
 .more-section { margin-top: 3rem; }
 .more-section h2 {
   font-family: 'Instrument Serif', serif;
@@ -281,7 +347,7 @@ header {
   display: flex; gap: 10px; align-items: baseline;
   font-size: 13.5px; line-height: 1.6; color: var(--text-muted);
 }
-.hl-item::before { content: '—'; font-family: 'DM Mono', monospace; color: var(--text-subtle); flex-shrink: 0; }
+.hl-item::before { content: '-'; font-family: 'DM Mono', monospace; color: var(--text-subtle); flex-shrink: 0; }
 
 /* LIGHTBOX */
 .lightbox {
@@ -345,31 +411,247 @@ header {
 <div class="panel" id="panel">
   <div class="panel-inner">
     <div class="panel-topbar">
-      <button class="close-btn" onclick="closePanel()">✕ Close</button>
+      <button class="close-btn" onclick="closePanel()">? Close</button>
     </div>
     <div class="panel-tags" id="panelTags"></div>
     <div class="panel-title" id="panelTitle"></div>
     <div class="panel-meta" id="panelMeta"></div>
     <div class="gallery" id="panelGallery"></div>
+    <div class="game-embed" id="gameEmbed" style="display:none;">
+      <div class="game-embed-header">Play the game</div>
+      <div class="game-frame-wrap">
+        <iframe id="gameIframe" src="" frameborder="0" allowfullscreen allow="fullscreen; autoplay; encrypted-media; picture-in-picture" title="Doodle Jump Game"></iframe>
+      </div>
+      <div class="game-actions">
+        <button class="game-action-btn" type="button" onclick="fullscreenGame()">Fullscreen</button>
+        <a class="game-action-btn game-action-link" id="gameLink" target="_blank" rel="noopener noreferrer">Open on external site</a>
+      </div>
+      <div class="game-note">If the game does not load inside the embed, open it in a separate tab.</div>
+    </div>
     <div class="section-label">Overview</div>
     <div class="panel-desc" id="panelDesc"></div>
     <div id="hlWrap" style="display:none">
       <div class="section-label">Key Points</div>
       <div class="highlights" id="panelHL"></div>
     </div>
+        <div class="code-section" id="gameCodeSection" style="display:none;">
+      <div class="section-label">Code</div>
+      <div class="code-subsection">
+        <div class="code-subheading">Setup</div>
+        <pre class="code-block"><code id="gameSetupCode">#Credit to Doodle Jump which is the original game
+#Credit to all image sources, which are linked where referanced
+#
+
+
+import random
+
+import math
+
+tiles_list = []
+
+lost = False
+
+move_speed = 7
+
+with_hat = "data:image/jpeg;base64,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"
+normal_player = "https://i.pinimg.com/474x/0d/08/73/0d0873eda506814a6883963e998cd22a.jpg"
+
+type_list = ["normal","normal","normal","normal","normal","normal","normal","normal","break","break","break","break","move","move","move","move","hole"]
+power_list = ["none","spring","hat"]
+
+height = meter(title="Height", align="left", color="black", suffix="")
+height.display(0)
+hiscore = meter(title="High Score", align="left", color="black", suffix="")
+hiscore.display(0)
+
+you_lost = label(text = "You Lost",pos=vec(0,0),size=vec(100,100))
+you_lost.visible = False
+
+player = circle(pos=vec(0,20),color="green",radius=10)
+player.image = normal_player
+player.v = vec(0,0)
+player.a = vec(0,-0.5)
+player.has_hat = False
+player.hat_timer = 0 
+
+
+temp_floor = rectangle(size=vec(1000,10),pos=vec(0,-10))
+temp_floor.stat = "break"
+temp_floor.v = vec(0,0)
+temp_floor.power = "none"
+tiles_list.append(temp_floor)
+
+
+
+
+
+def color(tile):
+  if tile.stat == "move":
+    tile.v = vec(1,0)
+    tile.color = "blue"
+  if tile.stat == "normal":
+    tile.color = "green"
+    tile.v = vec(0,0)
+  if tile.stat == "break":
+    tile.color = "brown"
+    tile.v = vec(0,0)
+  if tile.stat == "hole":
+    tile.color = "purple"
+    tile.v = vec(0,0)
+    tile.image = "https://i.pinimg.com/474x/34/da/19/34da19f077301cf8c77f8b15f56a753a.jpg"
+  if tile.power == "none":
+    pass
+  if tile.power == "spring":
+    tile.border_color = "black"
+    tile.border_size = 5
+  if tile.power == "hat":
+    tile.border_color = "orange"
+    tile.border_size = 5
+
+
+def generate(count):
+  for idx in range(count):
+    temp_stat = random.choice(type_list)
+    if temp_stat != "hole":
+      new_tile = rectangle(pos=vec(random.randint(-200,200),random.randint(math.ceil(player.pos.y),math.ceil(player.pos.y+200))),size=vec(50,10))
+    else:
+      new_tile = circle(pos=vec(random.randint(-200,200),random.randint(math.ceil(player.pos.y),math.ceil(player.pos.y+200))),radius = 20,image = "https://i.pinimg.com/474x/34/da/19/34da19f077301cf8c77f8b15f56a753a.jpg")
+    new_tile.stat = temp_stat
+    new_tile.v = vec(0,0)
+    tiles_list.append(new_tile)
+    
+    if random.randint(1,10) == 2:
+      new_tile.power = random.choice(power_list)
+    else:
+      new_tile.power = "none"
+    color(new_tile) # color and add velo to move
+    
+
+def effect(player,tile):
+	if tile.stat == "normal":
+		player.v.y = 10
+	if tile.stat == "break":
+		player.v.y = 10
+		tile.remove()
+		generate(1)
+		tiles_list.remove(tile)
+	if tile.stat == "move":
+		player.v.y = 10
+	if tile.stat == "hole":
+		you_lost.visible = True
+		world.set_extents(vec(0,0), vec(100,400))
+		return True
+	if tile.power == "none":
+		pass
+	if tile.power == "spring":
+		player.v.y = 15
+	if tile.power == "hat":
+		player.has_hat = True
+		player.hat_timer = 50
+		player.v.y = 10
+	return False
+generate(7)
+
+
+
+def move_tile(obj):
+  if obj.stat != "hole":
+    if obj.pos.x+(obj.size.x/2) > 200:
+      obj.v.x *= -1
+    elif obj.pos.x-(obj.size.x/2) <-200:
+      obj.v.x *= -1
+    obj.pos += obj.v
+
+def reset(tiles_list):
+  for idx in tiles_list:
+    idx.remove()
+    tiles_list.remove(idx)
+  player.pos = vec(0,10)
+  move_speed = 7
+  player.image = normal_player
+  temp_floor = rectangle(size=vec(1000,10),pos=vec(0,-10))
+  temp_floor.stat = "break"
+  temp_floor.v = vec(0,0)
+  temp_floor.visible = True
+  temp_floor.power = "none"
+  tiles_list.append(temp_floor)
+  generate(5)
+  player.pos = vec(0,20)
+  player.v = vec(0,0)
+  you_lost.visible = False
+  world.set_extents(vec(0,player.pos.y), vec(100,400))
+  return False
+
+	
+</code></pre>
+      </div>
+      <div class="code-subsection">
+        <div class="code-subheading">Game Loop</div>
+        <pre class="code-block"><code id="gameLoopCode">if keyboard.is_down("r") and lost == True:
+  lost = reset(tiles_list)
+if not lost:
+  world.set_extents(vec(0,player.pos.y), vec(100,400))
+
+  lowest_tile = tiles_list[0]
+  for tile in tiles_list:
+      if has_collided(tile,player) and player.v.y < 0:
+          lost = effect(player,tile)
+      if tile.pos.y < lowest_tile.pos.y:
+          lowest_tile = tile
+      move_tile(tile)
+  if player.pos.y + 100 < lowest_tile.pos.y:
+      you_lost.visible = True
+      world.set_extents(vec(0,0), vec(100,400))
+      lost = True
+
+  if lowest_tile.pos.y < player.pos.y - 200:
+      generate(1)
+      tiles_list.remove(lowest_tile)
+      lowest_tile.remove()
+
+  height.display(player.pos.y)
+  if hiscore.value < player.pos.y:
+    hiscore.display(player.pos.y)
+  player.pos += player.v
+  if player.has_hat == False:
+    player.image = normal_player
+    player.v += player.a
+  else:
+    player.hat_timer -= 1
+    player.image = with_hat
+  if player.hat_timer <= 0:
+    player.has_hat = False
+  if keyboard.is_down("ArrowLeft"):
+      player.pos -= vec(move_speed,0)
+  if keyboard.is_down("ArrowRight"):
+      player.pos += vec(move_speed,0)
+  if keyboard.is_down("a"):
+      player.pos -= vec(move_speed,0)
+  if keyboard.is_down("d"):
+      player.pos += vec(move_speed,0)
+  if player.pos.x > 200:
+      player.pos.x = -200
+  elif player.pos.x < -200:
+      player.pos.x = 200
+
+</code></pre>
+      </div>
+    </div>
+
+    </div>
   </div>
 </div>
 
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="handleLbClick(event)">
-  <button class="lb-close" onclick="closeLB()">✕ Close</button>
+  <button class="lb-close" onclick="closeLB()">? Close</button>
   <button class="lb-nav" id="lbPrev" onclick="lbStep(-1,event)">&#8592;</button>
   <img id="lbImg" src="" alt="">
   <button class="lb-nav" id="lbNext" onclick="lbStep(1,event)">&#8594;</button>
 </div>
 
 <script>
-// ─── PROJECT DATA ─────────────────────────────────────────────────────────────
+// --- PROJECT DATA -------------------------------------------------------------
 // Add image URLs to the `images` array for each project.
 // First image = card thumbnail. All images appear in the gallery.
 // To add local images when hosting on GitHub Pages, put them in an /images/ folder
@@ -381,7 +663,7 @@ const PROJECTS = [
     id: 'ftc',
     more: false,
     images: ['images/FTC/IMG_0411.JPEG', 'images/FTC/IMG_0416.JPEG', 'images/FTC/IMG_2015.jpg'],
-    title: 'FTC Competition Robot — Chilla Gorillas',
+    title: 'FTC Competition Robot - Chilla Gorillas',
     tags: ['robotics', 'elec'],
     meta: 'FIRST Tech Challenge · Decode Season · Flywheel shooter · Design and Electrical Lead · 8th / 32 teams',
     desc: `Served as Design Lead, Electrical Lead, and VP for the Chilla Gorillas FTC team during the Decode season. The robot was a top-loaded flywheel shooter, designed, iterated, and built largely independently with guidance from Leo, the team founder.
@@ -392,17 +674,17 @@ Everything was designed in Fusion 360. Also helped secure $500 in sponsorship fu
     highlights: [
       'Design Lead, Electrical Lead, and VP for Chilla Gorillas FTC',
       'Designed and built the flywheel shooter largely solo with mentorship from the team founder',
-      'Custom 3D printed gearbox designed to address RPM losses — friction remained an issue',
+      'Custom 3D printed gearbox designed to address RPM losses - friction remained an issue',
       'Placed 8th out of 32 teams in the Decode season',
       'All mechanical design done in Fusion 360',
       'Secured $500 in funding from Marin Sanitary Service',
-      'Rolling intake cut before competition — robot ran manual-load only',
+      'Rolling intake cut before competition - robot ran manual-load only',
     ],
   },
   {
     id: 'darkstar',
-    more: false,
-    images: ['images/FPV/Battery/IMG_2175.jpg', 'images/FPV/Battery/IMG_2176.jpg', 'images/FPV/Battery/IMG_2177.jpg'],
+    more: true,
+    images: [],
     title: 'Dark Star 22 FPV Quad',
     tags: ['fpv', 'elec', '3d'],
     meta: 'GEPRC TAKER F405 · GEP-M80 GPS/mag · Betaflight · ELRS · DJI O4 Pro · BNF mod',
@@ -410,36 +692,36 @@ Everything was designed in Fusion 360. Also helped secure $500 in sponsorship fu
 
 Worked through Betaflight configuration including a custom firmware cloud build with magnetometer support enabled, and deep I2C bus debugging to get the GEP-M80 communicating reliably on the STM32F405.`,
     highlights: [
-      'BNF quad modified extensively for long-range use',
+      'BNF quad modified to include gps + magnetometer',
       'GEPRC TAKER F405 AIO with ICM42688P gyro and DPS310 baro',
-      'DJI O4 Pro video with ELRS long-range control link',
-      'Custom Betaflight cloud firmware build with USE_MAG enabled',
-      '3D printed PETG GPS mast with foam vibration isolation',
+      'DJI O4 Pro video with ELRS control link',
+      'Betaflight configuration and custom firmware build with magnetometer support',
+      '3D printed PETG GPS mount to screw on top of the air unit',
       'Hand-soldered GPS and magnetometer directly onto the FC stack',
       'I2C bus debugging: mag_i2c_device config and clock speed tuning',
     ],
   },
   {
     id: 'nazgul',
-    more: false,
-    images: ['images/FPV/Battery/IMG_2176.jpg', 'images/FPV/Battery/IMG_2177.jpg'],
-    title: 'iFlight Nazgul — Assembly and Waterproofing',
+    more: true,
+    images: [],
+    title: 'iFlight Nazgul - Assembly and Waterproofing',
     tags: ['fpv', 'elec'],
     meta: 'BNF assembly · Conformal coating · Smoke stopper · FC diagnostics',
     desc: `One of three FPV builds. The Nazgul was purchased as a BNF, assembled, and then taken on as a waterproofing project using silicone conformal coating applied across all electronics.
 
-Performed staged submersion testing using a smoke stopper for safety, and diagnosed the USB-C port as the primary water ingress point. The project ended with a SOT-23 component on the FC smoking during testing, requiring a full FC replacement. After replacement, the waterproofing held up to further submersion tests with no additional failures, validating the coating process. I am yet to test it in salt water, which was the origional intention so I could fly it in my pool.`,
+Performed staged submersion testing using a smoke stopper for safety, and diagnosed the USB-C port as the issue. The project ended with a SOT-23 component on the FC smoking during testing, requiring a full FC replacement. After replacement, the waterproofing held up to further submersion tests with no additional failures. I am yet to test it in salt water, which was the origional intention so I could fly it in my pool`,
     highlights: [
-      'BNF purchased and fully assembled',
+      'BNF purchased originally',
       'Silicone conformal coating applied across all electronics',
       'Smoke stopper used throughout staged submersion testing',
-      'Diagnosed USB-C port as the primary water ingress point',
+      'Diagnosed USB-C port as the primary failure point',
       'SOT-23 component failure requiring FC replacement',
     ],
   },
   {
     id: 'shelf',
-    more: false,
+    more: true,
     images: ['images/Shelf System/IMG_2103.jpg'],
     title: '3D Printed Wall Mount Shelf System',
     tags: ['3d'],
@@ -480,7 +762,7 @@ Along the way, went deep on battery chemistry: the tradeoffs between LiPo and Li
   },
   {
     id: 'skittle',
-    more: false,
+    more: true,
     images: ['images/School projects/Skittle sorter/IMG_1352.jpg', 'images/School projects/Skittle sorter/IMG_1353.jpg'],
     title: 'Skittle Color Sorter',
     tags: ['elec', 'software', 'school'],
@@ -500,7 +782,7 @@ The enclosure was designed in Fusion 360 and laser cut. The finished machine ach
     id: 'studyapp',
     more: false,
     images: [],
-    title: 'Offline AI Study App — Hackathon',
+    title: 'Offline AI Study App - Hackathon',
     tags: ['software'],
     meta: 'Python · Ollama · Local LLM · Vibe coded · Honorable Mention',
     desc: `Built an AI-powered study application during a hackathon themed "AI for Good." The core idea: lower-income students often lack internet access at home, but they do have access at school. By running a local LLM through Ollama entirely on-device, a student could download the app at school and use a fully functional AI study assistant at home with no internet.
@@ -508,7 +790,7 @@ The enclosure was designed in Fusion 360 and laser cut. The finished machine ach
 The hackathon encouraged using AI to write the code, so the entire app was vibe-coded solo over roughly 8 hours while a partner handled the presentation. The app itself turned out far better than the slide deck. The project earned an honorable mention from the judges.`,
     highlights: [
       'Hackathon theme: "AI for Good"',
-      'Designed for students without home internet — fully offline after one-time download',
+      'Designed for students without home internet - fully offline after one-time download',
       'Powered by Ollama running a local LLM with no API calls or cloud dependency',
       'Entire app vibe-coded solo in roughly 8 hours',
       'Partner handled the presentation',
@@ -518,26 +800,28 @@ The hackathon encouraged using AI to write the code, so the entire app was vibe-
   {
     id: 'doodlejump',
     more: false,
-    images: [],
-    title: 'Doodle Jump Recreation — Python',
+    images: ['images/School projects/Doodle Jump/Screenshot 2026-05-30 043710.png'],
+    title: 'Doodle Jump Recreation - Python',
     tags: ['software', 'school'],
-    meta: 'Python · Pygame · APCSP · AP exam portfolio submission · Freshman year',
-    desc: `Recreated the classic mobile game Doodle Jump in Python as the Create Performance Task for the AP Computer Science Principles exam freshman year. Built the full game from scratch: game loop, physics, procedural platform generation, collision detection, and player controls.
+    meta: 'Python · Tychos · APCSP · AP exam portfolio submission · Freshman year',
+    desc: `Recreated the classic mobile game Doodle Jump in Python as the Create Performance Task for the AP Computer Science Principles exam freshman year. Built the full game from scratch: game loop, physics, procedural platform generation, collision detection, and player controls. Click on the settings icon to close the login window or to view the code. Use A, D, Left Arrow and Right Arrow keys to move the player character. Use R to reset or pause and reset with the buttons below. 
+    
 
 Submitted as the official APCSP portfolio piece demonstrating programming concepts including abstraction, algorithms, and iterative development. The code is still intact and the game is still runnable.`,
     highlights: [
       'AP Computer Science Principles Create Performance Task submission',
-      'Full game built from scratch in Python using Pygame',
+      'Full game built from scratch in Python using Tychos',
       'Physics system for jump arc and gravity',
       'Procedural platform generation for infinite vertical scrolling',
       'Collision detection for platforms and game state management',
-      'Freshman year — first large solo programming project',
+      'Freshman year - first large solo programming project',
+      'Fully hand coded, unlike most current projects',
     ],
   },
   {
     id: 'rocket',
     more: false,
-    images: [],
+    images: ['images/School projects/Rocket/IMG_1150.MOV'],
     title: 'Model Rocket',
     tags: ['school'],
     meta: 'CAD · Lathe · Altimeter · Engineering class',
@@ -549,7 +833,7 @@ Launch went well until the parachute failed on descent, sending the rocket nose-
       'Rocket designed in CAD from scratch',
       'Nose cone lathe-turned from wax',
       'Altimeter integrated inside the nose cone',
-      'Parachute failure on descent — rocket buried nose-first in mud',
+      'Parachute failure on descent - rocket buried nose-first in mud',
       'Altimeter data lost on impact',
     ],
   },
@@ -577,7 +861,7 @@ The electronics were straightforward: a USB-C adapter wired through a switch to 
     title: 'Structural Bridge',
     tags: ['school'],
     meta: 'CAD · FEA simulation · Wood rod · Manila folder gussets · ~80 lb load · Engineering class',
-    desc: `Designed a structural bridge in CAD, then used simulation for the first time to run finite element analysis and identify weak points before building. Working with a fixed material budget — a limited number of wood rods for members and manila folder strips for gussets — the simulation results directly informed where to reinforce.
+    desc: `Designed a structural bridge in CAD, then used simulation for the first time to run finite element analysis and identify weak points before building. Working with a fixed material budget - a limited number of wood rods for members and manila folder strips for gussets - the simulation results directly informed where to reinforce.
 
 The bridge held approximately 80 lbs in load testing. Did not win the competition but earned an A, and the simulation-driven design process was the real takeaway.`,
     highlights: [
@@ -614,14 +898,14 @@ The filter side was equally involved. Identifying and suppressing motor noise an
     id: 'serial',
     more: false,
     images: [],
-    title: 'Serial Protocols and RF Theory — Self-Taught',
+    title: 'Serial Protocols and RF Theory - Self-Taught',
     tags: ['fpv', 'elec'],
     meta: 'UART · I2C · ELRS · RF propagation · Link budget · Self-directed',
     desc: `Debugging FPV builds, particularly getting the GPS, magnetometer, and other peripherals communicating with the flight controller, forced a real understanding of how serial protocols work at a practical level.
 
 UART was first: baud rate, TX/RX wiring, why lines need to be crossed, and how to read Betaflight's ports configuration. I2C came through the magnetometer debugging: clock and data lines, pull-up resistors, device addressing, and why the I2C bus can silently fail when clock speed is mismatched with a peripheral's specification.
 
-Curiosity about the radio link and wanting to maximize range and obstacle penetration led into RF theory: how antenna gain and radiation patterns work, why circular polarization helps in a dynamic environment, the difference between 2.4GHz and 900MHz propagation, how ELRS uses LoRa modulation to achieve long range at low power, and how to think about link budget in terms of RSSI, SNR, and fade margin. None of this was assigned — it came from wanting to understand what was actually happening.`,
+Curiosity about the radio link and wanting to maximize range and obstacle penetration led into RF theory: how antenna gain and radiation patterns work, why circular polarization helps in a dynamic environment, the difference between 2.4GHz and 900MHz propagation, how ELRS uses LoRa modulation to achieve long range at low power, and how to think about link budget in terms of RSSI, SNR, and fade margin. None of this was assigned - it came from wanting to understand what was actually happening.`,
     highlights: [
       'UART: baud rate, port config, TX/RX wiring, Betaflight serial setup',
       'I2C: clock/data lines, pull-up resistors, device addressing, clock speed debugging',
@@ -634,7 +918,7 @@ Curiosity about the radio link and wanting to maximize range and obstacle penetr
   },
 ];
 
-// ─── TAG CONFIG ───────────────────────────────────────────────────────────────
+// --- TAG CONFIG ---------------------------------------------------------------
 const TAG_META = {
   fpv:      { label: 'FPV Drones',  cls: 'badge-fpv'      },
   robotics: { label: 'Robotics',    cls: 'badge-robotics'  },
@@ -647,7 +931,7 @@ function badge(id) {
   const t = TAG_META[id]; return t ? `<span class="badge ${t.cls}">${t.label}</span>` : '';
 }
 
-// ─── RENDER GRID ──────────────────────────────────────────────────────────────
+// --- RENDER GRID --------------------------------------------------------------
 function isVideo(src) { return /\.(mp4|webm|mov)(\?|$)/i.test(src); }
 function isHEIC(src) { return /\.(heic)(\?|$)/i.test(src); }
 
@@ -690,7 +974,7 @@ function renderGrid() {
   updateCount();
 }
 
-// ─── FILTER ───────────────────────────────────────────────────────────────────
+// --- FILTER -------------------------------------------------------------------
 document.querySelectorAll('.tag-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
@@ -708,7 +992,7 @@ function updateCount() {
   document.getElementById('count').textContent = `${n} project${n !== 1 ? 's' : ''}`;
 }
 
-// ─── PANEL ────────────────────────────────────────────────────────────────────
+// --- PANEL --------------------------------------------------------------------
 let gImgs = [], gIdx = 0;
 
 function openPanel(id) {
@@ -721,6 +1005,24 @@ function openPanel(id) {
 
   gImgs = p.images || []; gIdx = 0;
   renderGallery();
+
+  // Handle game embed for Doodle Jump
+  const gameEmbed = document.getElementById('gameEmbed');
+  const gameCodeSection = document.getElementById('gameCodeSection');
+  const panelGallery = document.getElementById('panelGallery');
+  if (id === 'doodlejump') {
+    gameEmbed.style.display = '';
+    gameCodeSection.style.display = '';
+    panelGallery.style.display = 'none';
+    document.getElementById('gameIframe').src = 'https://www.tychos.org/en/scenarios/IE9CAM';
+    document.getElementById('gameLink').href = 'https://www.tychos.org/en/scenarios/IE9CAM';
+  } else {
+    gameEmbed.style.display = 'none';
+    gameCodeSection.style.display = 'none';
+    panelGallery.style.display = '';
+    document.getElementById('gameIframe').src = '';
+    document.getElementById('gameLink').href = '#';
+  }
 
   const hlWrap = document.getElementById('hlWrap');
   const hlEl   = document.getElementById('panelHL');
@@ -741,7 +1043,19 @@ function closePanel() {
   document.body.style.overflow = '';
 }
 
-// ─── GALLERY ─────────────────────────────────────────────────────────────────
+function fullscreenGame() {
+  const embed = document.getElementById('gameEmbed');
+  if (!embed) return;
+  if (embed.requestFullscreen) {
+    embed.requestFullscreen();
+  } else if (embed.webkitRequestFullscreen) {
+    embed.webkitRequestFullscreen();
+  } else if (embed.msRequestFullscreen) {
+    embed.msRequestFullscreen();
+  }
+}
+
+// --- GALLERY -----------------------------------------------------------------
 function renderGallery() {
   const el = document.getElementById('panelGallery');
   if (!gImgs.length) {
@@ -781,7 +1095,7 @@ function setGallery(idx) {
   const main = document.querySelector('.gallery-main');
   if (main) {
     if (isVideo(src)) {
-      main.innerHTML = `<video id="gMain" src="${src}" controls playsinline style="width:100%;height:100%;object-fit:contain;background:#000;" preload="metadata"></video>`;
+      main.innerHTML = `<video id="gMain" src="${src}" controls playsinline style="width:100%;height:100%;object-fit:contain;background:#000;cursor:default;" preload="metadata"></video>`;
     } else {
       main.innerHTML = `<img id="gMain" src="${src}" onclick="openLB(${idx})" style="cursor:zoom-in;">`;
     }
@@ -789,7 +1103,7 @@ function setGallery(idx) {
   document.querySelectorAll('.gallery-thumb').forEach((t,i) => t.classList.toggle('active', i===idx));
 }
 
-// ─── LIGHTBOX ────────────────────────────────────────────────────────────────
+// --- LIGHTBOX ----------------------------------------------------------------
 function openLB(idx) {
   if (isVideo(gImgs[idx])) return; // videos play inline, no lightbox
   gIdx = idx;
@@ -807,7 +1121,7 @@ function lbStep(dir, e) {
   setGallery(gIdx);
 }
 
-// ─── KEYBOARD ────────────────────────────────────────────────────────────────
+// --- KEYBOARD ----------------------------------------------------------------
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') { closeLB(); closePanel(); }
   if (document.getElementById('lightbox').classList.contains('open')) {
@@ -816,8 +1130,15 @@ document.addEventListener('keydown', e => {
   }
 });
 
-// ─── INIT ─────────────────────────────────────────────────────────────────────
+// --- INIT ---------------------------------------------------------------------
 renderGrid();
 </script>
 </body>
 </html>
+
+
+
+
+
+
+
