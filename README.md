@@ -1,5 +1,7 @@
 # Portfolio
 
+WORK IN PROGRESS, expect more porjects and updates
+
 A collection of my engineering and robotics projects. Built as a single-file HTML site because I wanted something clean, fast, and without unnecessary dependencies.
 
 ## What's in here
