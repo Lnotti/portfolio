@@ -687,19 +687,19 @@ Everything was designed in Fusion 360. Also helped secure $500 in sponsorship fu
     images: [],
     title: '5-Channel LiPo Storage Discharger PCB',
     tags: ['elec'],
-    meta: 'KiCad · STM32F103C8T6 · 5-channel · 6S LiHV · JLCPCB · v0.1.1',
+    meta: 'KiCad · STM32F103C8T6 · 5-channel · 6S LiHV · JLCPCB · v0.2.0',
     desc: `A PCB designed to discharge 6S LiHV battery packs to storage voltage (3.8V/cell) across up to 5 independent, fully isolated channels simultaneously. Built to replace the two lipo chargers I already had that doubled as dischargers - one slow, low-current, and expensive, the other prone to over-discharge from leakage current and general forgettability.
 
 Each channel accepts a pack via XT60 and cuts off automatically at target voltage. The board runs on an STM32F103C8T6, with an active MOSFET load per channel, onboard buck/LDO power supply, and USB-C DFU flashing.
 
-Version 0.1.1 is a full redesign off the back of a schematic and layout review of the 0.1.0 prototype, which had several real hardware errors: an incorrect STM32 footprint, wrong wirewound resistor footprints, a buck converter underrated for LiHV's 26.1V max, and a voltage divider ratio that would have exceeded the STM32's ADC input limit at full charge. All fixed in 0.1.1, along with a move to hierarchical KiCad sheets for layout consistency across channels. 0.1.1 has been submitted for fabrication; firmware and control loop design are next.`,
+Version 0.2.0 is a full redesign off the back of a schematic and layout review of the 0.1.0 prototype, which had several real hardware errors: an incorrect STM32 footprint, wrong wirewound resistor footprints, a buck converter underrated for LiHV's 26.1V max, and a voltage divider ratio that would have exceeded the STM32's ADC input limit at full charge. All fixed in 0.1.1, along with a move to hierarchical KiCad sheets for layout consistency across channels. 0.1.1 has been submitted for fabrication; firmware and control loop design are next.`,
     highlights: [
       '5 independently isolated channels, each discharging a 6S LiHV pack to 22.8V storage voltage',
       'STM32F103C8T6 with active MOSFET load per channel and wirewound power resistors',
       'Caught and fixed real hardware errors from v0.1.0 during review: wrong footprints, underrated buck converter, unsafe ADC divider ratio for LiHV',
       'Redesigned in hierarchical KiCad sheets for uniform layout across all 5 channels',
       'USB-C DFU flashing, SWD debug header, active 40mm fan cooling',
-      'v0.1.1 submitted to JLCPCB for fabrication - firmware and control loop still open',
+      'v0.2.0 submitted to JLCPCB for fabrication - firmware and control loop still open',
     ],
   },
   {
